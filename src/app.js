@@ -17,8 +17,15 @@ app.get('/api', async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`Servidor ejecutándose en el puerto ${PORT}`);
 });
+
+setTimeout(() => {
+    console.log('Shutting down server after 10 seconds');
+    server.close(() => {
+        console.log('Server closed');
+    });
+}, 10000); 
 
 module.exports = app;
