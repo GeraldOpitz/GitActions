@@ -1,21 +1,24 @@
-// app.js
 const express = require('express');
-const os = require('os');
+const axios = require('axios');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
-  res.json({
-    status: 'OK',
-    message: 'Application is running!',
-    uptime: process.uptime(),
-    hostname: os.hostname(),
-    platform: os.platform(),
-    timestamp: new Date(),
-  });
+    res.send('¡Hola, mundo desde Node.js! Desafio');
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.get('/api', async (req, res) => {
+    try {
+        const response = await axios.get('https://jsonplaceholder.typicode.com/posts/1');
+        res.json(response.data);
+    } catch (error) {
+        res.status(500).send('Error al obtener datos de la API externa');
+    }
 });
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Servidor ejecutándose en el puerto ${PORT}`);
+});
+
+module.exports = app;
