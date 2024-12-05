@@ -6,7 +6,7 @@ on:
             - master
 jobs:
     build-and-push:
-        runs-on: ubuntu-latests
+        runs-on: ubuntu-latest
 
         steps:
         - name: Checkout code
