@@ -1,0 +1,33 @@
+name: Desafio Pipeline
+
+on:
+    push:
+        branches:
+            - main
+jobs:
+    build-and-push:
+        runs-on: ubuntu-latests
+
+        steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
+     
+        - name: Set up Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: '20'
+
+        - name: Install dependencies
+          run: npm install
+
+        - name: Docker login
+          run: docker login -u "${{ env.DOCKER_USERNAME }}" -p "${{ secrets.DOCKER_TOKEN }}"
+
+        - name: Docker build
+          run: docker build -t mi-app-node:latest .
+
+        - name: Docker tag
+          run: docker tag mi-app-node:latest mi-app-node-${{ github.sha }}:latest
+
+        - name: Docker push 
+          run: docker push mi-app-node-${{ github.sha }}:latest
