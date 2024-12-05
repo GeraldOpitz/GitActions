@@ -30,7 +30,7 @@ jobs:
           run: docker build -t mi-app-node:latest .
 
         - name: Docker tag
-          run: docker tag gopitz/mi-app-node:latest gopitz/mi-app-node-${{ github.sha }}:latest
+          run: docker tag mi-app-node:latest mi-app-node-${{ github.sha }}:latest
 
         - name: Docker push 
-          run: docker push mi-app-node-${{ github.sha }}:latest
+          run: docker push gopitz/mi-app-node-${{ github.sha }}:latest
