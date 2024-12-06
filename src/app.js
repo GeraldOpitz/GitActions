@@ -4,7 +4,7 @@ const axios = require('axios');
 const app = express();
 
 app.get('/', (req, res) => {
-    res.send('¡Hola, mundo desde Node.js! Desafio');
+    res.send('¡Hola, mundo desde Node.js! Probando nueva pc');
 });
 
 app.get('/api', async (req, res) => {
